@@ -16,15 +16,41 @@ export default class App extends Component {
 
 		this.handleKey = this.handleKey.bind(this);
 		this.getCameraPos = this.getCameraPos.bind(this);
+		this.getCameraRot = this.getCameraRot.bind(this);
 	}
 
 	getCameraPos() {
-		if (!this.state.cars[this.id]) return {x:0,y:4,z:0}
-		return {
-			x: this.state.cars[this.id].orientation.pos.x,
-			y: 4,
-			z: this.state.cars[this.id].orientation.pos.z
+		//console.log(this.state.cars[this.state.id])
+
+		const car = this.state.cars[this.state.id]
+		if (!car) return {x:0,y:4,z:0}
+
+		if (this.state.keys[32]) return {
+			x: car.orientation.pos.x - (Math.sin((car.orientation.rot.y+90)/180  * Math.PI) * 1.8), 
+			y: 20, 
+			z: car.orientation.pos.z- (Math.cos((car.orientation.rot.y+90)/180  * Math.PI) * 1.8)
 		}
+
+		let result = {
+			x: car.orientation.pos.x - (Math.sin(car.orientation.rot.y/180  * Math.PI) * 6) - (Math.sin((car.orientation.rot.y+90)/180  * Math.PI) * 1),
+			y: 5,
+			z: car.orientation.pos.z - (Math.cos(car.orientation.rot.y/180  * Math.PI) * 8) - (Math.cos((car.orientation.rot.y+90)/180  * Math.PI) * 1)
+		}
+		return result
+	}
+
+	getCameraRot() {
+		const car = this.state.cars[this.state.id]
+		if (!car) return {x:270,y:200,z:270}
+
+		if (this.state.keys[32]) return {x: 270, y: car.orientation.rot.y-180, z: 0}
+
+		let result = {
+			x: 330,
+			y: car.orientation.rot.y-180, 
+			z: 0
+		}
+		return result
 	}
 
 	handleKey(event){
@@ -49,7 +75,22 @@ export default class App extends Component {
 		})
 
 		socket.on("tick", (cars)=>this.setState({cars}))
-		socket.on("id", (id)=>this.setState({id}))
+		socket.on("id", (id)=>{
+			console.log(id)
+			this.setState({id})
+		})
+		//console.log(socket, socket.);
+
+		/*setTimeout(()=>{
+			console.log(socket.id)
+			this.setState({id: socket.id})
+		}, 200)
+/*
+		socket.emit("identification");
+		socket.on("identification", (id)=>{
+
+			this.setState({id: socket.id})
+		})*/
 
 		document.addEventListener("keydown", this.handleKey, false);
 		document.addEventListener("keyup", this.handleKey, false);
@@ -77,16 +118,31 @@ export default class App extends Component {
 	        }}
         	>
 	
+			<Entity position={this.getCameraPos()} rotation={this.getCameraRot()}>
+				<Entity primitive="a-camera" wasd-controls={{enabled:false}} look-controls={{enabled:false}} />
+			</Entity>
+			
+
+
+
+			{/*
 				<Entity primitive="a-camera" look-controls={{enabled:true}} orbit-controls={{
 					target: this.getCameraPos(),
 					minDistance: "0.5",
 					maxDistance: "180",
+					initialPosition: "0 20 100"
+				}}/>
+			*/}
+
+
+			{/*
+				<Entity primitive="a-camera" look-controls={{enabled:true}} orbit-controls={{
+					minDistance: "0.5",
+					maxDistance: "180",
 					initialPosition: "0 5 15"
 				}}/>
-			{/*
-			<Entity primitive="a-camera" position={this.getCameraPos()}/>
-				
 			*/}
+
 				{
 					Object.keys(this.state.cars).map(key => {
 						const car = this.state.cars[key];

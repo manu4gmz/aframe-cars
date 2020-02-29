@@ -38,7 +38,7 @@ function Car () {
   this.vel =  0;
   this.fr = 0.0020;
 
-  const acc =  0.005;
+  const acc =  0.0035;
   const maxVel = 0.2 
 
   this.accelerate = function (foward = true) {
@@ -49,9 +49,9 @@ function Car () {
 
   this.rotate = function (dir = true) {
     //if (Math.abs(this.vel) < 0.06) return;
-    if (Math.abs(this.vel) < 0.01) return;
-    console.log(this.vel)
-    this.orientation.rot.y += (0.2 * (dir ? 1 : -1)) / (this.vel*4)
+    if (Math.abs(this.vel) < 0.025) return;
+    this.orientation.rot.y +=  ((-1 * this.vel) + 0.6 ) * (dir ? 1 : -1) 
+    //this.orientation.rot.y += (0.2 * (dir ? 1 : -1)) / (this.vel*4)
   }
 }
 
@@ -66,12 +66,12 @@ Car.tick = function () {
     if (car.vel != 0) changed = true;
 
     if (car.vel > 0) {
-      car.vel -= car.fr;
+      car.vel -= (keys[key] && (keys[key][65] || keys[key][83]) ? car.fr/4 : car.fr);
       if (car.vel < 0) car.vel = 0;
     }
 
     if (car.vel < 0) {
-      car.vel += car.fr;
+      car.vel += (keys[key] && (keys[key][65] || keys[key][83]) ? car.fr/4 : car.fr);
       if (car.vel > 0) car.vel = 0;
     }
   //console.log(car.vel)
@@ -88,7 +88,11 @@ Car.tick = function () {
 
 io.on("connection",socket => {
   console.log(socket.id);
-  socket.emit("id", socket.id)
+
+  socket.on("identification", ()=> {
+    console.log("identification: ",socket.id)
+    io.to(socket.id).emit("identification", socket.id)
+  })
 
   cars[socket.id] = new Car();
   socket.emit("tick", cars)
@@ -103,6 +107,8 @@ io.on("connection",socket => {
   socket.on("disconnect",()=>{
     delete cars[socket.id]
   })
+
+  socket.emit("id", socket.id)
 
 })
 

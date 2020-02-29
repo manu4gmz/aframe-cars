@@ -46822,22 +46822,52 @@ var App = /*#__PURE__*/function (_Component) {
     };
     _this.handleKey = _this.handleKey.bind(_assertThisInitialized(_this));
     _this.getCameraPos = _this.getCameraPos.bind(_assertThisInitialized(_this));
+    _this.getCameraRot = _this.getCameraRot.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(App, [{
     key: "getCameraPos",
     value: function getCameraPos() {
-      if (!this.state.cars[this.id]) return {
+      //console.log(this.state.cars[this.state.id])
+      var car = this.state.cars[this.state.id];
+      if (!car) return {
         x: 0,
         y: 4,
         z: 0
       };
-      return {
-        x: this.state.cars[this.id].orientation.pos.x,
-        y: 4,
-        z: this.state.cars[this.id].orientation.pos.z
+      if (this.state.keys[32]) return {
+        x: car.orientation.pos.x - Math.sin((car.orientation.rot.y + 90) / 180 * Math.PI) * 1.8,
+        y: 20,
+        z: car.orientation.pos.z - Math.cos((car.orientation.rot.y + 90) / 180 * Math.PI) * 1.8
       };
+      var result = {
+        x: car.orientation.pos.x - Math.sin(car.orientation.rot.y / 180 * Math.PI) * 6 - Math.sin((car.orientation.rot.y + 90) / 180 * Math.PI) * 1,
+        y: 5,
+        z: car.orientation.pos.z - Math.cos(car.orientation.rot.y / 180 * Math.PI) * 8 - Math.cos((car.orientation.rot.y + 90) / 180 * Math.PI) * 1
+      };
+      return result;
+    }
+  }, {
+    key: "getCameraRot",
+    value: function getCameraRot() {
+      var car = this.state.cars[this.state.id];
+      if (!car) return {
+        x: 270,
+        y: 200,
+        z: 270
+      };
+      if (this.state.keys[32]) return {
+        x: 270,
+        y: car.orientation.rot.y - 180,
+        z: 0
+      };
+      var result = {
+        x: 330,
+        y: car.orientation.rot.y - 180,
+        z: 0
+      };
+      return result;
     }
   }, {
     key: "handleKey",
@@ -46863,10 +46893,23 @@ var App = /*#__PURE__*/function (_Component) {
         });
       });
       socket.on("id", function (id) {
-        return _this2.setState({
+        console.log(id);
+
+        _this2.setState({
           id: id
         });
-      });
+      }); //console.log(socket, socket.);
+
+      /*setTimeout(()=>{
+      	console.log(socket.id)
+      	this.setState({id: socket.id})
+      }, 200)
+      /*
+      socket.emit("identification");
+      socket.on("identification", (id)=>{
+      			this.setState({id: socket.id})
+      })*/
+
       document.addEventListener("keydown", this.handleKey, false);
       document.addEventListener("keyup", this.handleKey, false);
     }
@@ -46897,17 +46940,17 @@ var App = /*#__PURE__*/function (_Component) {
           grid: 'none'
         }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_2__["Entity"], {
+        position: this.getCameraPos(),
+        rotation: this.getCameraRot()
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_2__["Entity"], {
         primitive: "a-camera",
-        "look-controls": {
-          enabled: true
+        "wasd-controls": {
+          enabled: false
         },
-        "orbit-controls": {
-          target: this.getCameraPos(),
-          minDistance: "0.5",
-          maxDistance: "180",
-          initialPosition: "0 5 15"
+        "look-controls": {
+          enabled: false
         }
-      }), Object.keys(this.state.cars).map(function (key) {
+      })), Object.keys(this.state.cars).map(function (key) {
         var car = _this3.state.cars[key];
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_2__["Entity"], {
           primitive: "a-obj-model",
