@@ -46769,12 +46769,195 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return App; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
-/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var aframe_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! aframe-react */ "./node_modules/aframe-react/dist/index.js");
-/* harmony import */ var aframe_react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(aframe_react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! aframe-particle-system-component */ "./node_modules/aframe-particle-system-component/index.js");
-/* harmony import */ var aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _Enter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Enter */ "./src/components/Enter.jsx");
+/* harmony import */ var _Game__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Game */ "./src/components/Game.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var App = /*#__PURE__*/function (_Component) {
+  _inherits(App, _Component);
+
+  function App() {
+    var _this;
+
+    _classCallCheck(this, App);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this));
+    _this.state = {
+      name: "",
+      spectator: false
+    };
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(App, [{
+    key: "handleSubmit",
+    value: function handleSubmit(e, form) {
+      e.preventDefault();
+      this.setState(form);
+      this.props.history.push("/play");
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/enter",
+        render: function render() {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Enter__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            handleSubmit: _this2.handleSubmit
+          });
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+        path: "/play",
+        render: function render() {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Game__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            name: _this2.state.name,
+            spectator: _this2.state.spectator
+          });
+        }
+      }));
+    }
+  }]);
+
+  return App;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./src/components/Enter.jsx":
+/*!**********************************!*\
+  !*** ./src/components/Enter.jsx ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Enter; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Enter = /*#__PURE__*/function (_Component) {
+  _inherits(Enter, _Component);
+
+  function Enter() {
+    var _this;
+
+    _classCallCheck(this, Enter);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Enter).call(this));
+    _this.state = {
+      name: "",
+      spectator: false
+    };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(Enter, [{
+    key: "handleChange",
+    value: function handleChange(_ref) {
+      var target = _ref.target;
+      this.setState(_defineProperty({}, target.name, target.type == "checkbox" ? target.checked : target.value));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: function onSubmit(e) {
+          return _this2.props.handleSubmit(e, _this2.state);
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        placeholder: "Nombre",
+        name: "name",
+        value: this.state.name,
+        onChange: this.handleChange
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Espectador", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "checkbox",
+        name: "spectator",
+        onChange: this.handleChange,
+        checked: this.state.spectator
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "submit"
+      })));
+    }
+  }]);
+
+  return Enter;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
+
+/***/ }),
+
+/***/ "./src/components/Game.jsx":
+/*!*********************************!*\
+  !*** ./src/components/Game.jsx ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Game; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! socket.io-client */ "./node_modules/socket.io-client/lib/index.js");
+/* harmony import */ var socket_io_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(socket_io_client__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var aframe_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! aframe-react */ "./node_modules/aframe-react/dist/index.js");
+/* harmony import */ var aframe_react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(aframe_react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! aframe-particle-system-component */ "./node_modules/aframe-particle-system-component/index.js");
+/* harmony import */ var aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -46804,29 +46987,32 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var App = /*#__PURE__*/function (_Component) {
-  _inherits(App, _Component);
 
-  function App(props) {
+var Game = /*#__PURE__*/function (_Component) {
+  _inherits(Game, _Component);
+
+  function Game(props) {
     var _this;
 
-    _classCallCheck(this, App);
+    _classCallCheck(this, Game);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Game).call(this, props));
     _this.state = {
       socket: null,
       spectator: true,
       keys: {},
       cars: {},
-      id: null
+      id: null,
+      zoom: 1
     };
     _this.handleKey = _this.handleKey.bind(_assertThisInitialized(_this));
+    _this.handleZoom = _this.handleZoom.bind(_assertThisInitialized(_this));
     _this.getCameraPos = _this.getCameraPos.bind(_assertThisInitialized(_this));
     _this.getCameraRot = _this.getCameraRot.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(App, [{
+  _createClass(Game, [{
     key: "getCameraPos",
     value: function getCameraPos() {
       //console.log(this.state.cars[this.state.id])
@@ -46838,13 +47024,15 @@ var App = /*#__PURE__*/function (_Component) {
       };
       if (this.state.keys[32]) return {
         x: car.orientation.pos.x - Math.sin((car.orientation.rot.y + 90) / 180 * Math.PI) * 1.8,
-        y: 20,
+        y: 10 + 8 * this.state.zoom,
         z: car.orientation.pos.z - Math.cos((car.orientation.rot.y + 90) / 180 * Math.PI) * 1.8
       };
       var result = {
-        x: car.orientation.pos.x - Math.sin(car.orientation.rot.y / 180 * Math.PI) * 6 - Math.sin((car.orientation.rot.y + 90) / 180 * Math.PI) * 1,
-        y: 5,
-        z: car.orientation.pos.z - Math.cos(car.orientation.rot.y / 180 * Math.PI) * 8 - Math.cos((car.orientation.rot.y + 90) / 180 * Math.PI) * 1
+        //x: car.orientation.pos.x - (Math.sin(car.orientation.rot.y/180  * Math.PI) * 4  * this.state.zoom) - (Math.sin((car.orientation.rot.y+90)/180  * Math.PI) * 1),
+        x: car.orientation.pos.x - Math.sin(car.orientation.rot.y / 180 * Math.PI) * 4 * this.state.zoom,
+        y: 5 * this.state.zoom,
+        //z: car.orientation.pos.z - (Math.cos(car.orientation.rot.y/180  * Math.PI) * 5  * this.state.zoom) - (Math.cos((car.orientation.rot.y+90)/180  * Math.PI) * 1)
+        z: car.orientation.pos.z - Math.cos(car.orientation.rot.y / 180 * Math.PI) * 5 * this.state.zoom
       };
       return result;
     }
@@ -46863,7 +47051,7 @@ var App = /*#__PURE__*/function (_Component) {
         z: 0
       };
       var result = {
-        x: 330,
+        x: 340 - 5 * this.state.zoom,
         y: car.orientation.rot.y - 180,
         z: 0
       };
@@ -46879,11 +47067,25 @@ var App = /*#__PURE__*/function (_Component) {
       this.state.socket.emit("input", this.state.keys);
     }
   }, {
+    key: "handleZoom",
+    value: function handleZoom(e) {
+      var newZoom = this.state.zoom - e.wheelDelta / 2000;
+      if (newZoom < 0.34) return;
+      if (newZoom > 3) return;
+      this.setState({
+        zoom: newZoom
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
 
-      var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_1___default()();
+      if (!this.props.name) return;
+      console.log(this.props.spectator);
+      var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2___default()(window.location.origin, {
+        query: "name=".concat(this.props.name, "&spectator=").concat(this.props.spectator)
+      });
       this.setState({
         socket: socket
       });
@@ -46892,6 +47094,7 @@ var App = /*#__PURE__*/function (_Component) {
           cars: cars
         });
       });
+      if (this.props.spectator) return;
       socket.on("id", function (id) {
         console.log(id);
 
@@ -46912,18 +47115,24 @@ var App = /*#__PURE__*/function (_Component) {
 
       document.addEventListener("keydown", this.handleKey, false);
       document.addEventListener("keyup", this.handleKey, false);
+      document.addEventListener('mousewheel', this.handleZoom, false);
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       document.removeEventListener("keydown", this.handleKey, false);
+      document.removeEventListener("keyup", this.handleKey, false);
+      document.removeEventListener("mousewheel", this.handleZoom, false);
     }
   }, {
     key: "render",
     value: function render() {
       var _this3 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_2__["Scene"], {
+      if (!this.props.name) return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+        to: "/enter"
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Scene"], {
         environment: {
           preset: 'starry',
           seed: 2,
@@ -46934,15 +47143,27 @@ var App = /*#__PURE__*/function (_Component) {
           },
           fog: 0.2,
           ground: 'hills',
-          groundYScale: 6.31,
-          groundTexture: 'none',
+          groundYScale: 3.31,
           groundColor: '#36b357',
-          grid: 'none'
+          flatShading: true,
+          grid: 'none',
+          dressing: "trees",
+          dressingColor: "#16692b"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_2__["Entity"], {
+      }, this.props.spectator ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Entity"], {
+        primitive: "a-camera",
+        "look-controls": {
+          enabled: true
+        },
+        "orbit-controls": {
+          minDistance: "0.5",
+          maxDistance: "180",
+          initialPosition: "0 5 15"
+        }
+      }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Entity"], {
         position: this.getCameraPos(),
         rotation: this.getCameraRot()
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_2__["Entity"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Entity"], {
         primitive: "a-camera",
         "wasd-controls": {
           enabled: false
@@ -46952,23 +47173,45 @@ var App = /*#__PURE__*/function (_Component) {
         }
       })), Object.keys(this.state.cars).map(function (key) {
         var car = _this3.state.cars[key];
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_2__["Entity"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Entity"], {
+          rotation: car.orientation.rot,
+          position: car.orientation.pos,
+          key: key
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Entity"], {
           primitive: "a-obj-model",
           src: "assets/car.obj",
           mtl: "assets/car.mtl",
+          position: "1 0 0",
           scale: {
             x: "0.01",
             y: "0.01",
             z: "0.01"
+          }
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Entity"], {
+          light: {
+            type: "point",
+            color: car.color,
+            intensity: 0.4,
+            distance: 0
           },
-          rotation: car.orientation.rot,
-          position: car.orientation.pos
-        });
+          position: "0 1 0"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Entity"], {
+          primitive: "a-text",
+          value: car.name,
+          position: "-0.2 2.3 -0.4",
+          align: "center"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Entity"], {
+          primitive: "a-text",
+          value: car.name,
+          position: "-0.2 2.3 -0.4",
+          align: "center",
+          rotation: "0 180 0"
+        }));
       })));
     }
   }]);
 
-  return App;
+  return Game;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 /*
 				<Entity geometry={{primitive:"box"}} material={{color: 'red'}} position={{x: 0, y: 0, z: -5}}/>
@@ -46984,6 +47227,7 @@ var App = /*#__PURE__*/function (_Component) {
 */
 // 0.10920000076294 0.13607999682426 0.20999999344349
 // 1.00000000000000 0.00000000000000 0.00000000000000
+//Kd 0.05200000107288 0.06480000168085 0.10000000149012
 
 
 
