@@ -13,13 +13,15 @@ export default class Game extends Component {
 			keys: {},
 			cars: {},
 			id: null,
-			zoom: 1
+			zoom: 1,
+			touch: false
 		}
 
 		this.handleKey = this.handleKey.bind(this);
 		this.handleZoom = this.handleZoom.bind(this);
 		this.getCameraPos = this.getCameraPos.bind(this);
 		this.getCameraRot = this.getCameraRot.bind(this);
+		this.touchInput = this.touchInput.bind(this);
 	}
 
 	getCameraPos() {
@@ -114,8 +116,46 @@ export default class Game extends Component {
 		document.addEventListener("keyup", this.handleKey, false);
 
 		document.addEventListener('mousewheel', this.handleZoom, false);
+
+		document.addEventListener("touchstart", (ev)=> {
+			this.setState({touch: true}) 
+			this.touchInput(ev)
+		})
+		document.addEventListener("touchmove", this.touchInput);
+		document.addEventListener("touchmove", this.touchInput);
+		document.addEventListener("touchend", (ev)=> {
+			this.setState({touch: false, keys: {}})
+			this.touchInput(ev)
+
+		})
 	}
 
+	touchInput(event) {
+		if (!this.state.touch) {
+
+			return this.state.socket.emit("input", this.state.keys)
+		} 
+		const { clientX, clientY } = event.targetTouches[0];
+		const { x, y } = { x: clientX / window.innerWidth, y: clientY / window.innerHeight };
+		console.log(x, y, this.state.touch);
+		this.setState({ keys: { 
+			87: (y < 0.5),
+			83: (y > 0.75),
+			65: (x < 0.33),
+			68: (x > 0.66),
+			32: event.targetTouches.length > 2
+		} })
+
+		this.state.socket.emit("input", this.state.keys)
+
+	}
+
+/*
+		W = key[87],
+        A = key[65],
+        S = key[83],
+        D = key[68],
+        */
 	componentWillUnmount(){
 	    document.removeEventListener("keydown", this.handleKey, false);
 	    document.removeEventListener("keyup", this.handleKey, false);
@@ -126,7 +166,30 @@ export default class Game extends Component {
 		if (!this.props.name) return <Redirect to="/enter"/>
 		return (
 			<div>
-			<h1></h1>	
+				<h1></h1>
+				<table style={{
+					zIndex: 1,
+					backgroundColor: "rgba(100, 100, 100, 0.2)",
+					position: "absolute",
+					color: "white",
+					display: "inline-block",
+				}}>
+				<tbody>
+				{
+					Object.keys(this.state.cars).map((key,i) => {
+						const car = this.state.cars[key];
+
+						return <tr key={key} style={{backgroundColor: (i%2) ? "#00000010" : "none", 
+						padding: "0px 5px",
+						display: "block",
+					}}>
+						    <td width="100">{car.name}</td>
+						    <td>{car.knockouts}</td>
+						  </tr>
+					})
+				}
+				</tbody>
+				</table>
 			<Scene
 			environment={{
 	          preset: 'starry',
@@ -204,12 +267,18 @@ export default class Game extends Component {
 								{/*<Entity geometry={{primitive:"box"}} material={{color: 'white', opacity: 0.1}} position="-0.2 0 -0.45" scale="1.6 2.2 3.1"/>*/}
 								<Entity primitive="a-obj-model" src="assets/car.obj" mtl="assets/car.mtl" position="1 0 0" scale={{x:"0.01", y:"0.01", z:"0.01"}} />
 								{/*<Entity primitive="a-obj-model" src="assets/car1.obj" mtl="assets/car1.mtl" position="1 0 0" scale={{x:"0.01", y:"0.01", z:"0.01"}} />*/}
+								
+								{/*
+								<Entity geometry={{primitive:"box"}} material={{color: 'red', opacity: 0.2}} position="0 0 0.8" scale="1 1 1"/>
+								<Entity geometry={{primitive:"box"}} material={{color: 'blue', opacity: 0.2}} position="0 0 -1.4" scale="1 1 1"/>
 								<Entity light={{
 									type: "point",
-									color: car.color,
+									color: car.inmortal ? "white" : car.color,
 									intensity: 0.4,
 									distance: 0
 								}} position="0 1 0"></Entity>
+								*/}
+
 								<Entity primitive="a-text" value={car.name} position="-0.2 2.3 -0.4" align="center"/>
 								<Entity primitive="a-text" value={car.name} position="-0.2 2.3 -0.4" align="center" rotation="0 180 0"/>
 							</Entity>

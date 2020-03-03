@@ -6,15 +6,18 @@ export default class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			name: "",
-			spectator: false
+			name: window.localStorage.getItem("name") || "",
+			spectator: window.localStorage.getItem("spectator") == "true" || false
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	handleSubmit(e,form) {
 		e.preventDefault();
-		this.setState(form)
+		this.setState(form);
+
+		window.localStorage.setItem("name", form.name);
+		window.localStorage.setItem("spectator", form.spectator);
 
 		this.props.history.push("/play")
 	}
@@ -24,6 +27,7 @@ export default class App extends Component {
 			<Switch>
 				<Route path="/enter" render={()=><Enter handleSubmit={this.handleSubmit}/>}/>
 				<Route path="/play" render={()=><Game name={this.state.name} spectator={this.state.spectator} />}/>
+				<Redirect path="/" exact to="/enter"/>
 			</Switch>
 		);
 	}

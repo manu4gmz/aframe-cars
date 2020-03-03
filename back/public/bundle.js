@@ -46805,8 +46805,8 @@ var App = /*#__PURE__*/function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this));
     _this.state = {
-      name: "",
-      spectator: false
+      name: window.localStorage.getItem("name") || "",
+      spectator: window.localStorage.getItem("spectator") == "true" || false
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     return _this;
@@ -46817,6 +46817,8 @@ var App = /*#__PURE__*/function (_Component) {
     value: function handleSubmit(e, form) {
       e.preventDefault();
       this.setState(form);
+      window.localStorage.setItem("name", form.name);
+      window.localStorage.setItem("spectator", form.spectator);
       this.props.history.push("/play");
     }
   }, {
@@ -46839,6 +46841,10 @@ var App = /*#__PURE__*/function (_Component) {
             spectator: _this2.state.spectator
           });
         }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
+        path: "/",
+        exact: true,
+        to: "/enter"
       }));
     }
   }]);
@@ -46921,11 +46927,15 @@ var Enter = /*#__PURE__*/function (_Component) {
         name: "name",
         value: this.state.name,
         onChange: this.handleChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Espectador", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
+        className: "container"
+      }, "Entrar como espectador", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "checkbox",
         name: "spectator",
         onChange: this.handleChange,
         checked: this.state.spectator
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "checkmark"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "submit"
       })));
@@ -47003,12 +47013,14 @@ var Game = /*#__PURE__*/function (_Component) {
       keys: {},
       cars: {},
       id: null,
-      zoom: 1
+      zoom: 1,
+      touch: false
     };
     _this.handleKey = _this.handleKey.bind(_assertThisInitialized(_this));
     _this.handleZoom = _this.handleZoom.bind(_assertThisInitialized(_this));
     _this.getCameraPos = _this.getCameraPos.bind(_assertThisInitialized(_this));
     _this.getCameraRot = _this.getCameraRot.bind(_assertThisInitialized(_this));
+    _this.touchInput = _this.touchInput.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -47116,7 +47128,59 @@ var Game = /*#__PURE__*/function (_Component) {
       document.addEventListener("keydown", this.handleKey, false);
       document.addEventListener("keyup", this.handleKey, false);
       document.addEventListener('mousewheel', this.handleZoom, false);
+      document.addEventListener("touchstart", function (ev) {
+        _this2.setState({
+          touch: true
+        });
+
+        _this2.touchInput(ev);
+      });
+      document.addEventListener("touchmove", this.touchInput);
+      document.addEventListener("touchmove", this.touchInput);
+      document.addEventListener("touchend", function (ev) {
+        _this2.setState({
+          touch: false,
+          keys: {}
+        });
+
+        _this2.touchInput(ev);
+      });
     }
+  }, {
+    key: "touchInput",
+    value: function touchInput(event) {
+      if (!this.state.touch) {
+        return this.state.socket.emit("input", this.state.keys);
+      }
+
+      var _event$targetTouches$ = event.targetTouches[0],
+          clientX = _event$targetTouches$.clientX,
+          clientY = _event$targetTouches$.clientY;
+      var _x$y = {
+        x: clientX / window.innerWidth,
+        y: clientY / window.innerHeight
+      },
+          x = _x$y.x,
+          y = _x$y.y;
+      console.log(x, y, this.state.touch);
+      this.setState({
+        keys: {
+          87: y < 0.5,
+          83: y > 0.75,
+          65: x < 0.33,
+          68: x > 0.66,
+          32: event.targetTouches.length > 2
+        }
+      });
+      this.state.socket.emit("input", this.state.keys);
+    }
+    /*
+    		W = key[87],
+            A = key[65],
+            S = key[83],
+            D = key[68],
+            */
+
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
@@ -47132,7 +47196,27 @@ var Game = /*#__PURE__*/function (_Component) {
       if (!this.props.name) return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
         to: "/enter"
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Scene"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
+        style: {
+          zIndex: 1,
+          backgroundColor: "rgba(100, 100, 100, 0.2)",
+          position: "absolute",
+          color: "white",
+          display: "inline-block"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, Object.keys(this.state.cars).map(function (key, i) {
+        var car = _this3.state.cars[key];
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: key,
+          style: {
+            backgroundColor: i % 2 ? "#00000010" : "none",
+            padding: "0px 5px",
+            display: "block"
+          }
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", {
+          width: "100"
+        }, car.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, car.knockouts));
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Scene"], {
         environment: {
           preset: 'starry',
           seed: 2,
@@ -47187,14 +47271,6 @@ var Game = /*#__PURE__*/function (_Component) {
             y: "0.01",
             z: "0.01"
           }
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Entity"], {
-          light: {
-            type: "point",
-            color: car.color,
-            intensity: 0.4,
-            distance: 0
-          },
-          position: "0 1 0"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_3__["Entity"], {
           primitive: "a-text",
           value: car.name,

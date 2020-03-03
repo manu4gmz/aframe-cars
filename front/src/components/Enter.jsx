@@ -22,7 +22,10 @@ export default class Enter extends Component {
 			<div>
 				<form onSubmit={(e)=>this.props.handleSubmit(e,this.state)}>
 					<input placeholder="Nombre" name="name" value={this.state.name} onChange={this.handleChange} />
-					<label>Espectador<input type="checkbox" name="spectator" onChange={this.handleChange} checked={this.state.spectator}/></label>
+					<label className="container">Entrar como espectador
+						<input type="checkbox" name="spectator" onChange={this.handleChange} checked={this.state.spectator}/>
+						<span className="checkmark" />
+					</label>
 					<input type="submit" />
 				</form>
 			</div>

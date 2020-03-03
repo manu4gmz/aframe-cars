@@ -6,8 +6,6 @@ app.use(express.static(path.join(__dirname, "/public")))
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 
-
-
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, "./public/index.html"));
 });
@@ -35,13 +33,16 @@ function Car (name) {
       x: 0, y: 0, z: 0
     }
   };
+  this.bumped = false;
+  this.inmortal = false;
+  this.knockouts = 0;
   this.vel =  0;
   this.fr = 0.0008;
 
   this.rotating = 0;
 
   const rotatingMax = 0.6;
-  const acc =  0.004;
+  const acc =  0.002;
   const maxVel = 0.25;
   
   this.color = ["red","green","blue","yellow"][Math.floor(Math.random()*4)]
@@ -63,9 +64,9 @@ function Car (name) {
     if (Math.abs(this.rotating) > rotatingMax) return;
     const dir = (this.vel > 0 ? 1 : -1) * direction
     if (this.vel > 0.075)
-      this.orientation.rot.y += (dir ? 1 : -1)*(-1.4*Math.abs(this.vel) + 0.69)/1.5;
+      this.orientation.rot.y += (dir ? 1 : -1)*(-1.4*Math.abs(this.vel) + 0.69)/1.2;
     else 
-      this.orientation.rot.y += (dir ? 1 : -1)*(-103*(Math.abs(this.vel) - 0.15)*Math.abs(this.vel))/1.5;
+      this.orientation.rot.y += (dir ? 1 : -1)*(-103*(Math.abs(this.vel) - 0.15)*Math.abs(this.vel))/1.2;
 
     //this.rotating += (((-1 * this.vel) + 0.6 ) * (dir ? 1 : -1))/50
     //console.log(this.rotating)
@@ -78,34 +79,67 @@ function toRads(degree) {
 }
 
 Car.tick = function () {
+  const mappedCords = Object.keys(cars).map(key => {
+    const car = cars[key]
+    return {
+      key,
+      inmortal: car.inmortal || car.bumped,
+      x: car.orientation.pos.x + Math.sin(car.orientation.rot.y /180 * Math.PI) * -1.4, 
+      z: car.orientation.pos.z + Math.cos(car.orientation.rot.y /180 * Math.PI) * -1.4
+    }
+  })
+
   let changed = false;
   Object.keys(cars).forEach((key)=>{
     const car = cars[key];
     if (car.vel != 0 || car.rotating != 0) changed = true;
 
     if (car.vel > 0) {
-      //car.vel -= (keys[key] && (keys[key][65] || keys[key][83]) ? car.fr/2 : car.fr);
-      car.vel -= car.fr
+      car.vel -= (keys[key] && (keys[key][65] || keys[key][83]) ? car.fr/2 : car.fr);
+      //car.vel -= car.fr
       
       if (car.vel < 0) car.vel = 0;
     }
 
     if (car.vel < 0) {
-      //car.vel += (keys[key] && (keys[key][65] || keys[key][83]) ? car.fr/2 : car.fr);
-      car.vel += car.fr
+      car.vel += (keys[key] && (keys[key][65] || keys[key][83]) ? car.fr/2 : car.fr);
+      //car.vel += car.fr
       if (car.vel > 0) car.vel = 0;
     }
-  //console.log(car.vel)
-  //console.log(car.orientation.rot.y)
 
-
-
-      
     car.orientation.pos.x += Math.sin(toRads(car.orientation.rot.y)) * car.vel;
     car.orientation.pos.z += Math.cos(toRads(car.orientation.rot.y)) * car.vel;
 
+    const forwardCoords = {
+      x: car.orientation.pos.x + Math.sin(toRads(car.orientation.rot.y))*0.8,
+      z: car.orientation.pos.z + Math.cos(toRads(car.orientation.rot.y))*0.8
+    }
 
-    //car.orientation.pos.z += car.vel;
+    mappedCords.forEach((otherCar)=>{
+      if (otherCar.key === key || otherCar.inmortal || car.bumped) return;
+      const dist = Math.sqrt((forwardCoords.x - otherCar.x)**2 + (forwardCoords.z - otherCar.z)**2);
+
+      if (dist < 1.5) {
+        let key = otherCar.key;
+        cars[otherCar.key].orientation.rot.z = 160;
+        cars[otherCar.key].orientation.pos.y = 1.6;
+        cars[key].bumped = true;
+        cars[key].inmortal = true;
+        cars[key].acc = 0;
+        car.knockouts += 1;
+        car.acc = 0;
+        car.vel = -0.06;
+        setTimeout(()=>{
+          cars[otherCar.key].orientation.rot.z = 0;
+          cars[otherCar.key].orientation.pos.y = 0;
+          cars[key].bumped = false;
+        }, 4000)
+        setTimeout(()=>{
+          cars[key].inmortal = false;
+
+        }, 6000)
+      }
+    })
   })
   return changed;
 }
@@ -149,6 +183,8 @@ function tick() {
     const key = keys[playerId];
     const car = cars[playerId];
     //console.log(keys);
+
+    if (car.bumped) return;
 
     const   W = key[87],
         A = key[65],
