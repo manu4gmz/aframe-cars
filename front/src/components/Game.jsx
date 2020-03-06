@@ -91,7 +91,9 @@ export default class Game extends Component {
 			socket
 		})
 
-		socket.on("tick", (cars)=>this.setState({cars}))
+		socket.on("tick", (cars)=>
+			this.setState({cars})
+		)
 
 		if (this.props.spectator) return;
 
@@ -99,18 +101,6 @@ export default class Game extends Component {
 			console.log(id)
 			this.setState({id})
 		})
-		//console.log(socket, socket.);
-
-		/*setTimeout(()=>{
-			console.log(socket.id)
-			this.setState({id: socket.id})
-		}, 200)
-/*
-		socket.emit("identification");
-		socket.on("identification", (id)=>{
-
-			this.setState({id: socket.id})
-		})*/
 
 		document.addEventListener("keydown", this.handleKey, false);
 		document.addEventListener("keyup", this.handleKey, false);
@@ -150,12 +140,6 @@ export default class Game extends Component {
 
 	}
 
-/*
-		W = key[87],
-        A = key[65],
-        S = key[83],
-        D = key[68],
-        */
 	componentWillUnmount(){
 	    document.removeEventListener("keydown", this.handleKey, false);
 	    document.removeEventListener("keyup", this.handleKey, false);
@@ -203,25 +187,8 @@ export default class Game extends Component {
 	          grid: 'none',
 	          dressing: "trees",
 	          dressingColor: "#16692b",
-
-
 	        }}
         	>
-		{/*
-		          preset: 'starry',
-	          seed: 2,
-	          lightPosition: { x: 0.0, y: 0.5, z: 0.0 },
-	          fog: 0.2,
-	          ground: 'hills',
-	          groundYScale: 6.31,
-	          groundColor: '#36b357',
-	          grid: 'none',
-	          dressing: "trees",
-	          playArea: 100,
-	          dressingColor: "#16692b"
-	      */}
-			
-
 
         	{
         		this.props.spectator ? 
@@ -236,48 +203,15 @@ export default class Game extends Component {
 				</Entity>
         	}
 			
-			
-
-
-			{/*
-
-				<Entity primitive="a-camera" look-controls={{enabled:true}} orbit-controls={{
-					target: this.getCameraPos(),
-					minDistance: "0.5",
-					maxDistance: "180",
-					initialPosition: "0 20 100"
-				}}/>
-
-			*/}
-
-				
 
 				{
 					Object.keys(this.state.cars).map(key => {
 						const car = this.state.cars[key];
 						return (
 							<Entity rotation={car.orientation.rot} position={car.orientation.pos} key={key}>
-								{/*
-									  z
-									  ^
-									  |
-								x <---o
-
-								*/}
-								{/*<Entity geometry={{primitive:"box"}} material={{color: 'white', opacity: 0.1}} position="-0.2 0 -0.45" scale="1.6 2.2 3.1"/>*/}
-								<Entity primitive="a-obj-model" src="assets/car.obj" mtl="assets/car.mtl" position="1 0 0" scale={{x:"0.01", y:"0.01", z:"0.01"}} />
-								{/*<Entity primitive="a-obj-model" src="assets/car1.obj" mtl="assets/car1.mtl" position="1 0 0" scale={{x:"0.01", y:"0.01", z:"0.01"}} />*/}
 								
-								{/*
-								<Entity geometry={{primitive:"box"}} material={{color: 'red', opacity: 0.2}} position="0 0 0.8" scale="1 1 1"/>
-								<Entity geometry={{primitive:"box"}} material={{color: 'blue', opacity: 0.2}} position="0 0 -1.4" scale="1 1 1"/>
-								<Entity light={{
-									type: "point",
-									color: car.inmortal ? "white" : car.color,
-									intensity: 0.4,
-									distance: 0
-								}} position="0 1 0"></Entity>
-								*/}
+								<Entity primitive="a-obj-model" src="assets/car.obj" mtl="assets/car.mtl" position="1 0 0" scale={{x:"0.01", y:"0.01", z:"0.01"}} />
+
 
 								<Entity primitive="a-text" value={car.name} position="-0.2 2.3 -0.4" align="center"/>
 								<Entity primitive="a-text" value={car.name} position="-0.2 2.3 -0.4" align="center" rotation="0 180 0"/>
@@ -293,22 +227,3 @@ export default class Game extends Component {
 		);
 	}
 }
- 
-/*
-				<Entity geometry={{primitive:"box"}} material={{color: 'red'}} position={{x: 0, y: 0, z: -5}}/>
-
-<a-obj-model src="crate.obj" mtl="crate.mtl"></a-obj-model>
-
-	<a-assets>
-    <a-asset-item id="cityModel" src="https://cdn.aframe.io/test-models/models/glTF-2.0/virtualcity/VC.gltf"></a-asset-item>
-  </a-assets>
-
-  <a-entity gltf-model="#cityModel" modify-materials></a-entity>
-
-*/
-
-// 0.10920000076294 0.13607999682426 0.20999999344349
-
-// 1.00000000000000 0.00000000000000 0.00000000000000
-
-//Kd 0.05200000107288 0.06480000168085 0.10000000149012

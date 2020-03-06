@@ -46,7 +46,8 @@ function Car (name) {
   const maxVel = 0.25;
   
   this.color = ["red","green","blue","yellow"][Math.floor(Math.random()*4)]
-  this.name = name
+  this.name = name;
+  this.offline = false;
 
   this.accelerate = function (forward = true) {
     if (forward && this.vel > maxVel ) return;
@@ -92,6 +93,8 @@ Car.tick = function () {
   let changed = false;
   Object.keys(cars).forEach((key)=>{
     const car = cars[key];
+    if (car.offline) return;
+    
     if (car.vel != 0 || car.rotating != 0) changed = true;
 
     if (car.vel > 0) {
@@ -116,7 +119,7 @@ Car.tick = function () {
     }
 
     mappedCords.forEach((otherCar)=>{
-      if (otherCar.key === key || otherCar.inmortal || car.bumped) return;
+      if (otherCar.key === key || otherCar.inmortal || car.bumped || otherCar.offline) return;
       const dist = Math.sqrt((forwardCoords.x - otherCar.x)**2 + (forwardCoords.z - otherCar.z)**2);
 
       if (dist < 1.5) {
@@ -171,7 +174,11 @@ io.on("connection",socket => {
   })
 
   socket.on("disconnect",()=>{
-    delete cars[socket.id]
+    cars[socket.id].acc=0;
+    cars[socket.id].vel=0;
+    cars[socket.id].offline = true;
+    keys[socket.id] = {}
+
   })
 
   socket.emit("id", socket.id)
@@ -202,5 +209,5 @@ function tick() {
 
 setInterval(()=>{
   tick();
-  Car.tick() && io.emit("tick", cars)
+  Car.tick() && io.emit("tick", Object.fromEntries(Object.keys(cars).filter(key => !cars[key].offline).map(key => [key, cars[key]])))
 }, 10)

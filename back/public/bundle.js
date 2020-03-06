@@ -46772,7 +46772,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _Enter__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Enter */ "./src/components/Enter.jsx");
 /* harmony import */ var _Game__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Game */ "./src/components/Game.jsx");
-/* harmony import */ var _CubeDemo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CubeDemo */ "./src/components/CubeDemo.jsx");
+/* harmony import */ var _Iphone__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Iphone */ "./src/components/Iphone.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -46844,8 +46844,8 @@ var App = /*#__PURE__*/function (_Component) {
           });
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-        path: "/cube",
-        component: _CubeDemo__WEBPACK_IMPORTED_MODULE_4__["default"]
+        path: "/demo",
+        component: _Iphone__WEBPACK_IMPORTED_MODULE_4__["default"]
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
         path: "/",
         exact: true,
@@ -46855,286 +46855,6 @@ var App = /*#__PURE__*/function (_Component) {
   }]);
 
   return App;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
-
-/***/ }),
-
-/***/ "./src/components/CubeDemo.jsx":
-/*!*************************************!*\
-  !*** ./src/components/CubeDemo.jsx ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CubeDemo; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var aframe_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! aframe-react */ "./node_modules/aframe-react/dist/index.js");
-/* harmony import */ var aframe_react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(aframe_react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! aframe-particle-system-component */ "./node_modules/aframe-particle-system-component/index.js");
-/* harmony import */ var aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-var CubeDemo = /*#__PURE__*/function (_Component) {
-  _inherits(CubeDemo, _Component);
-
-  function CubeDemo() {
-    var _this;
-
-    _classCallCheck(this, CubeDemo);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(CubeDemo).call(this));
-    _this.state = {
-      x: 0.5,
-      y: 0,
-      z: 0.0
-    };
-
-    window.manage = function (x, y, z) {
-      return _this.setState({
-        x: x,
-        y: y,
-        z: z
-      });
-    };
-
-    return _this;
-  }
-
-  _createClass(CubeDemo, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      window.pos = {
-        x: 0.5,
-        y: 0,
-        z: 0.0
-      };
-      console.log;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var divLeft = {
-        width: "60%",
-        height: "100vh",
-        display: "inline-block",
-        "float": "left"
-      };
-      var divRight = {
-        width: "40%",
-        height: "100vh",
-        display: "inline-block",
-        "float": "left"
-      };
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: divLeft
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Scene"], {
-        embedded: true,
-        style: divLeft
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-camera",
-        "look-controls": {
-          enabled: true
-        },
-        "orbit-controls": {
-          minDistance: "0.5",
-          maxDistance: "180",
-          initialPosition: "0 5 0",
-          target: "0 0 0"
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-obj-model",
-        src: "assets/Iphone 8.obj",
-        mtl: "assets/Iphone_8.mtl",
-        position: "0 -3 2",
-        scale: {
-          x: "0.01",
-          y: "0.01",
-          z: "0.01"
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-light",
-        type: "point",
-        color: "white",
-        intensity: "1.0",
-        position: "5 -5 5"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-light",
-        type: "point",
-        color: "white",
-        intensity: "1.0",
-        position: "5 5 5"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-light",
-        type: "ambient",
-        color: "white",
-        intensity: "1.0"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "IPhone 8",
-        rotation: "0 180 0",
-        position: "-2.6 0 0",
-        height: "4",
-        width: "10"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "Camara re",
-        rotation: "0 340 0",
-        position: "0.2 2.2 0.2",
-        height: "4",
-        width: "9"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "fachera",
-        rotation: "0 340 0",
-        position: "0.2 1.8 0.2",
-        height: "4",
-        width: "9"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: " 420 Mpx",
-        rotation: "0 340 0",
-        position: "0.2 1.4 0.2",
-        height: "2",
-        width: "5"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: " 10 Km Zoom",
-        rotation: "0 340 0",
-        position: "0.2 1 0.2",
-        height: "2",
-        width: "5"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "6 Kg de RAM",
-        rotation: "0 200 0",
-        position: "2.1 -1.2 -0.6",
-        height: "4",
-        width: "7"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "+12 Kg de ROM",
-        rotation: "0 200 0",
-        position: "2.1 -1.6 -0.6",
-        height: "4",
-        width: "5"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "Precios modicos",
-        rotation: "0 20 0",
-        position: "-4.8 -1.4 1",
-        height: "4",
-        width: "7"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "de 9999U$D",
-        rotation: "0 20 0",
-        position: "-3.8 -1.6 0.7",
-        height: "4",
-        width: "3"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "Vidrio re duro",
-        rotation: "0 170 0",
-        position: "2 3 1",
-        height: "4",
-        width: "8"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "(resiste una caida",
-        rotation: "0 170 0",
-        position: "2 2.7 1",
-        height: "4",
-        width: "4"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "del aulta de arriba",
-        rotation: "0 170 0",
-        position: "2 2.4 1",
-        height: "4",
-        width: "4"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "de P5 a traves del",
-        rotation: "0 170 0",
-        position: "2 2.1 1",
-        height: "4",
-        width: "4"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "huequito del vidrio)",
-        rotation: "0 170 0",
-        position: "2 1.8 1",
-        height: "4",
-        width: "4"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "Cargador",
-        rotation: "0 0 0",
-        position: "-1 -2 1",
-        height: "4",
-        width: "8"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "super especifico",
-        rotation: "0 0 0",
-        position: "-1 -2.4 1",
-        height: "4",
-        width: "5"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-text",
-        value: "y super molesto",
-        rotation: "0 0 0",
-        position: "-1 -2.7 1",
-        height: "4",
-        width: "5"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
-        primitive: "a-sky",
-        color: "#222"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: divRight
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          marginTop: "200px"
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        style: {
-          fontSize: "6rem"
-        }
-      }, "IPhone 8"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-        style: {
-          fontSize: "3rem",
-          color: "#555"
-        }
-      }, "Just the right amount of everything.")));
-    }
-  }]);
-
-  return CubeDemo;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
@@ -47398,18 +47118,7 @@ var Game = /*#__PURE__*/function (_Component) {
         _this2.setState({
           id: id
         });
-      }); //console.log(socket, socket.);
-
-      /*setTimeout(()=>{
-      	console.log(socket.id)
-      	this.setState({id: socket.id})
-      }, 200)
-      /*
-      socket.emit("identification");
-      socket.on("identification", (id)=>{
-      			this.setState({id: socket.id})
-      })*/
-
+      });
       document.addEventListener("keydown", this.handleKey, false);
       document.addEventListener("keyup", this.handleKey, false);
       document.addEventListener('mousewheel', this.handleZoom, false);
@@ -47459,13 +47168,6 @@ var Game = /*#__PURE__*/function (_Component) {
       });
       this.state.socket.emit("input", this.state.keys);
     }
-    /*
-    		W = key[87],
-            A = key[65],
-            S = key[83],
-            D = key[68],
-            */
-
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
@@ -47574,22 +47276,343 @@ var Game = /*#__PURE__*/function (_Component) {
 
   return Game;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-/*
-				<Entity geometry={{primitive:"box"}} material={{color: 'red'}} position={{x: 0, y: 0, z: -5}}/>
 
-<a-obj-model src="crate.obj" mtl="crate.mtl"></a-obj-model>
 
-	<a-assets>
-    <a-asset-item id="cityModel" src="https://cdn.aframe.io/test-models/models/glTF-2.0/virtualcity/VC.gltf"></a-asset-item>
-  </a-assets>
 
-  <a-entity gltf-model="#cityModel" modify-materials></a-entity>
+/***/ }),
 
-*/
-// 0.10920000076294 0.13607999682426 0.20999999344349
-// 1.00000000000000 0.00000000000000 0.00000000000000
-//Kd 0.05200000107288 0.06480000168085 0.10000000149012
+/***/ "./src/components/Iphone.jsx":
+/*!***********************************!*\
+  !*** ./src/components/Iphone.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Iphone; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var aframe_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! aframe-react */ "./node_modules/aframe-react/dist/index.js");
+/* harmony import */ var aframe_react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(aframe_react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! aframe-particle-system-component */ "./node_modules/aframe-particle-system-component/index.js");
+/* harmony import */ var aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(aframe_particle_system_component__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var Iphone = /*#__PURE__*/function (_Component) {
+  _inherits(Iphone, _Component);
+
+  function Iphone() {
+    var _this;
+
+    _classCallCheck(this, Iphone);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Iphone).call(this));
+    _this.state = {
+      x: 0.5,
+      y: 0,
+      z: 0.0
+    };
+
+    window.manage = function (x, y, z) {
+      return _this.setState({
+        x: x,
+        y: y,
+        z: z
+      });
+    };
+
+    return _this;
+  }
+
+  _createClass(Iphone, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.pos = {
+        x: 0.5,
+        y: 0,
+        z: 0.0
+      };
+      console.log;
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var divLeft = {
+        width: "60%",
+        height: "100vh",
+        display: "inline-block",
+        "float": "left"
+      };
+      var divRight = {
+        width: "40%",
+        height: "100vh",
+        display: "inline-block",
+        "float": "left"
+      };
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: divLeft
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Scene"], {
+        embedded: true,
+        style: divLeft
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-camera",
+        "look-controls": {
+          enabled: true
+        },
+        "orbit-controls": {
+          minDistance: "0.5",
+          maxDistance: "180",
+          initialPosition: "1 0 -5",
+          target: "-1 0 0"
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-obj-model",
+        src: "assets/Iphone 8.obj",
+        mtl: "assets/Iphone_8.mtl",
+        position: "0 -3 2",
+        scale: {
+          x: "0.01",
+          y: "0.01",
+          z: "0.01"
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-light",
+        type: "point",
+        color: "white",
+        intensity: "1.0",
+        position: "5 -5 5"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-light",
+        type: "point",
+        color: "white",
+        intensity: "1.0",
+        position: "5 5 5"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-light",
+        type: "ambient",
+        color: "white",
+        intensity: "1.0"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "Rebordes",
+        rotation: "0 180 0",
+        position: "-2.6 0 0",
+        height: "4",
+        width: "7"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "de plastico",
+        rotation: "0 180 0",
+        position: "-2.6 -0.3 0",
+        height: "4",
+        width: "5"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "cualquiera",
+        rotation: "0 180 0",
+        position: "-2.6 -0.6 0",
+        height: "4",
+        width: "5"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "Camara re",
+        rotation: "0 340 0",
+        position: "0.2 2.2 0.2",
+        height: "4",
+        width: "9"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "fachera",
+        rotation: "0 340 0",
+        position: "0.2 1.8 0.2",
+        height: "4",
+        width: "9"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: " 420 Mpx",
+        rotation: "0 340 0",
+        position: "0.2 1.4 0.2",
+        height: "2",
+        width: "5"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: " 10 Km Zoom",
+        rotation: "0 340 0",
+        position: "0.2 1 0.2",
+        height: "2",
+        width: "5"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "6 Kg de RAM",
+        rotation: "0 200 0",
+        position: "2.1 -1.2 -0.6",
+        height: "4",
+        width: "7"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "+12 Kg de ROM",
+        rotation: "0 200 0",
+        position: "2.1 -1.6 -0.6",
+        height: "4",
+        width: "5"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "Precios modicos",
+        rotation: "0 20 0",
+        position: "-4.8 -1.4 1",
+        height: "4",
+        width: "7"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "de 9999U$D",
+        rotation: "0 20 0",
+        position: "-3.8 -1.6 0.7",
+        height: "4",
+        width: "3"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "Vidrio re duro",
+        rotation: "0 170 0",
+        position: "2 3 1",
+        height: "4",
+        width: "8"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "(resiste una caida",
+        rotation: "0 170 0",
+        position: "2 2.7 1",
+        height: "4",
+        width: "4"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "del aulta de arriba",
+        rotation: "0 170 0",
+        position: "2 2.4 1",
+        height: "4",
+        width: "4"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "de P5 a traves del",
+        rotation: "0 170 0",
+        position: "2 2.1 1",
+        height: "4",
+        width: "4"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "huequito del vidrio)",
+        rotation: "0 170 0",
+        position: "2 1.8 1",
+        height: "4",
+        width: "4"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "Cargador",
+        rotation: "0 0 0",
+        position: "-1 -2 1",
+        height: "4",
+        width: "8"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "super especifico",
+        rotation: "0 0 0",
+        position: "-1 -2.4 1",
+        height: "4",
+        width: "5"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "y super molesto",
+        rotation: "0 0 0",
+        position: "-1 -2.7 1",
+        height: "4",
+        width: "5"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "Boton con",
+        rotation: "0 20 0",
+        position: "-3.5 2.2 1",
+        height: "4",
+        width: "4"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "huella dactilar",
+        rotation: "0 20 0",
+        position: "-3.5 2 1",
+        height: "4",
+        width: "3"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-text",
+        color: "black",
+        value: "del pie",
+        rotation: "0 20 0",
+        position: "-3.5 1.8 1",
+        height: "4",
+        width: "3"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(aframe_react__WEBPACK_IMPORTED_MODULE_1__["Entity"], {
+        primitive: "a-sky",
+        color: "#FFF"
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: divRight
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          marginTop: "200px"
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        style: {
+          fontSize: "6rem"
+        }
+      }, "IPhone 8"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+        style: {
+          fontSize: "3rem",
+          color: "#555"
+        }
+      }, "Just the right amount of everything.")));
+    }
+  }]);
+
+  return Iphone;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Switch, Route, Redirect} from "react-router-dom";
 import Enter from "./Enter";
 import Game from "./Game";
-import CubeDemo from "./CubeDemo";
+import Iphone from "./Iphone";
 
 export default class App extends Component {
 	constructor() {
@@ -29,7 +29,7 @@ export default class App extends Component {
 			<Switch>
 				<Route path="/enter" render={()=><Enter handleSubmit={this.handleSubmit}/>}/>
 				<Route path="/play" render={()=><Game name={this.state.name} spectator={this.state.spectator} />}/>
-				<Route path="/cube" component={CubeDemo}/>
+				<Route path="/demo" component={Iphone}/>
 				<Redirect path="/" exact to="/enter"/>
 			</Switch>
 		);
