@@ -209,5 +209,5 @@ function tick() {
 
 setInterval(()=>{
   tick();
-  Car.tick() && io.emit("tick", Object.fromEntries(Object.keys(cars).filter(key => !cars[key].offline).map(key => [key, cars[key]])))
+  Car.tick() && io.emit("tick", cars)//Object.fromEntries(Object.keys(cars).filter(key => !cars[key].offline).map(key => [key, cars[key]])))
 }, 10)
