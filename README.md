@@ -4,13 +4,18 @@ Autos controlables en 3D, a tiempo real con los demás usuarios y pueden chocars
 
 Esta demo fue realizada con el fin de ejemplificar el potencial de Aframe, una libreria para JavaScript basada en Three Js que tiene el fin de hacer representaciones 3D de una forma más sencilla y familiar parecido al formato HTML.
 
+<img src="./back/public/screenshots/enter.png" height="200"/>
+<img src="./back/public/screenshots/play_1.png" height="200"/>
+<img src="./back/public/screenshots/play_2.png" height="200"/>
+
 Para esta aplicación se utilizó:
 * react
 * aframe-react
 * socket.io
-   entre otros.
 
------
+*(y otros más)*
+
+-----------------
 
 ### Inicialización
 
@@ -39,3 +44,7 @@ Para esta aplicación se utilizó:
 4. **Ingresar**
 
    Ingresá a `localhost:3000` en tu navegador (preferiblemente Chrome).
+
+5. **Extra**
+
+   Para realizar cambios en front hay que instalar las dependencias de la misma forma que en back, en `/front`, y para mantenerlo    actualizado ejecutar `npm build`.
